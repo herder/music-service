@@ -1,29 +1,44 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: music-service
+  labels:
+    app: music-service
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: music-service
   template:
+    metadata:
+      labels:
+        app: music-service
     spec:
       containers:
         - name: music-service
           image: ghcr.io/thomasvitale/music-service
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
           ports:
             - containerPort: 8080
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 15
           resources:
             requests:
-              cpu: "0.1"
+              cpu: "0.2"
               memory: "756Mi"
             limits:
-              cpu: "1"
+              cpu: "2"
               memory: "756Mi"
