@@ -26,8 +26,8 @@ tasks.named('test') {
 }
 
 tasks.named('bootBuildImage') {
-	// This builder is only for ARM64 systems. On AMD64, delete the line.
+	// This builder is only for ARM64 systems.
 	// For more info: https://github.com/dashaun/paketo-arm64
-	builder = "ghcr.io/thomasvitale/java-builder-arm64"
+	// builder = "ghcr.io/thomasvitale/java-builder-arm64"
 	imageName = "ghcr.io/thomasvitale/music-service"
 }
