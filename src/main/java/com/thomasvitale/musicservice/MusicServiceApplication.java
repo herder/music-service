@@ -21,7 +21,7 @@ public class MusicServiceApplication {
 	RouterFunction<ServerResponse> routerFunction() {
 		return RouterFunctions.route()
 			.GET("/", request -> ServerResponse.ok().bodyValue(List.of(
-				new Music("Måneskin"),
+				new Music("Måneskinnnn"),
 				new Music("Guns 'n' Roses"),
 				new Music("Led Zeppelin")
 			)))
